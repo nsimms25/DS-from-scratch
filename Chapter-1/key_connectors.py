@@ -55,3 +55,9 @@ num_users = len(users)
 avg_connections = total_connections / num_users
 #print("The average number of connections per user:", avg_connections)
 
+#Create a list of friends and sort.
+num_friends_list = [(user["id"], number_of_friends(user)) for user in users]
+num_friends_list.sort(key=lambda id_and_friends: id_and_friends[1], reverse=True)
+#print(num_friends_list)
+#Output: [(1, 3), (2, 3), (3, 3), (5, 3), (8, 3), (0, 2), (4, 2), (6, 2), (7, 2), (9, 1)]
+
