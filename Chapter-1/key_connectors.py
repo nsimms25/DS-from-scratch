@@ -11,7 +11,7 @@ def create_friends_dict(friendship_pairs, users):
     
     return friendships
 
-def number_of_friends(user, friendships):
+def number_of_friends(user):
     user_id = user["id"]
     friend_id = friendships[user_id]
 
@@ -35,14 +35,23 @@ friendship_pairs = [(0,1),(0,2),(1,2),(1,3),(2,3),(3,4),
                     (4,5),(5,6),(5,7),(6,8),(7,8),(8,9),]
 
 #Create the friends dict once instead of iterating over everytime we have a question.
-friends_dict = create_friends_dict(
+friendships = create_friends_dict(
     users=users,
     friendship_pairs=friendship_pairs)
 
-print(friends_dict)
+#print(friendships)
 
 #Answers, how many friends does user[0] have?
-user_friends = number_of_friends(friendships=friends_dict,
-                                 user=users[0])
+user_friends = number_of_friends(user=users[0])
+#print(user_friends)
 
-print(user_friends)
+#Other useful stats
+total_connections = sum(number_of_friends(user=user) for user in users)
+#print("The total number of connections are:", total_connections)
+
+num_users = len(users)
+#print("The total number of users are:", num_users)
+
+avg_connections = total_connections / num_users
+#print("The average number of connections per user:", avg_connections)
+
