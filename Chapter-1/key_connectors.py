@@ -2,6 +2,8 @@
 Find key connectors from an example social network.
 """
 
+from collections import Counter
+
 def create_friends_dict(friendship_pairs, users):
     friendships = {user["id"]: [] for user in users}
 
@@ -61,3 +63,33 @@ num_friends_list.sort(key=lambda id_and_friends: id_and_friends[1], reverse=True
 #print(num_friends_list)
 #Output: [(1, 3), (2, 3), (3, 3), (5, 3), (8, 3), (0, 2), (4, 2), (6, 2), (7, 2), (9, 1)]
 
+
+"""
+Connections you may know suggestions for social networks.
+"""
+
+def foaf_ids_flaw(user):
+    return [foaf_id
+        for friend_id in friendships[user["id"]]
+        for foaf_id in friendships[friend_id]]
+
+foaf_user0 = foaf_ids_flaw(user=users[0])
+print(foaf_user0)
+#Output: [0, 2, 3, 0, 1, 3]
+#Explanation:
+# 0 is friends with 2 people (since it is bidirectional both those connections are valid)
+# 3 is reachable from two paths (1 and 2), which is why it appears twice. 
+
+def friends_of_friends(user):
+    user_id = user['id']
+    return Counter(
+        foaf_id
+        for friend_id in friendships[user_id]
+        for foaf_id in friendships[friend_id]
+        if foaf_id != user_id
+        and foaf_id not in friendships[user_id]
+    )
+#print(friends_of_friends(users[3]))
+#Output: Counter({0: 2, 5: 1})
+#Explanation:
+# Id=3 has two mutual friends with id=0 and only one with id=5
