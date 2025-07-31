@@ -2,7 +2,7 @@
 Find key connectors from an example social network.
 """
 
-from collections import Counter
+from collections import Counter, defaultdict
 
 def create_friends_dict(friendship_pairs, users):
     friendships = {user["id"]: [] for user in users}
@@ -60,6 +60,7 @@ avg_connections = total_connections / num_users
 #Create a list of friends and sort.
 num_friends_list = [(user["id"], number_of_friends(user)) for user in users]
 num_friends_list.sort(key=lambda id_and_friends: id_and_friends[1], reverse=True)
+
 #print(num_friends_list)
 #Output: [(1, 3), (2, 3), (3, 3), (5, 3), (8, 3), (0, 2), (4, 2), (6, 2), (7, 2), (9, 1)]
 
@@ -74,7 +75,8 @@ def foaf_ids_flaw(user):
         for foaf_id in friendships[friend_id]]
 
 foaf_user0 = foaf_ids_flaw(user=users[0])
-print(foaf_user0)
+#print(foaf_user0)
+
 #Output: [0, 2, 3, 0, 1, 3]
 #Explanation:
 # 0 is friends with 2 people (since it is bidirectional both those connections are valid)
@@ -90,6 +92,39 @@ def friends_of_friends(user):
         and foaf_id not in friendships[user_id]
     )
 #print(friends_of_friends(users[3]))
+
 #Output: Counter({0: 2, 5: 1})
 #Explanation:
 # Id=3 has two mutual friends with id=0 and only one with id=5
+
+
+interests = [
+    (0, "Hadoop"), (0, "Big Data"), (0, "Java"), (0, "Spark"), (0, "Storm"), (0, "Cassandra"),
+    (1, "NoSQL"), (1, "MongoDB"), (1, "Cassandra"), (1, "HBase"), (1, "Postgres"),
+    (2, "Python"), (2, "scikit-learn"), (2, "scipy"), (2, "numpy"), (2, "statsmodels"), (2, "pandas"),
+    (3, "R"), (3, "Python"), (3, "statistics"), (3, "regression"), (3, "probability"),
+    (4, "machin learning"), (4, "regression"), (4, "decision trees"), (4, "libsvm"), 
+    (5, "Python"), (5, "R"), (5, "Java"), (5, "C++"), (5, "Haskell"), (5, "programming languages"),
+    (6, "statistics"), (6, "probability"), (6, "mathematics"), (6, "theory"),
+    (7, "machine learning"), (7, "scikit-learn"), (7, "Mahout"), (7, "neural networks"),
+    (8, "Big Data"), (8, "artificial intelligence"), (8, "deep learning"), (8, "neural networks"),
+    (9, "Hadoop"), (9, "Java"), (9, "MapReduce"), (9, "Big Data")
+]
+
+def data_scientists_that_like(interest):
+    return [
+        user_id
+        for user_id, user_interest in interests
+        if user_interest == interest
+    ]
+
+#Above will require a search of every item in the list.
+
+user_ids_by_interest = defaultdict(list)
+for user_id, interest in interests:
+    user_ids_by_interest[interest].append(user_id)
+
+interests_by_user_id = defaultdict(list)
+for user_id, interest in interests:
+    interests_by_user_id[user_id].append(interest)
+
