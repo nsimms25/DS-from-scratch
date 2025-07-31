@@ -140,4 +140,52 @@ def most_common_interest_with(user):
         if interested_user_id != user["id"]
     )
 
-print(most_common_interest_with(user=users[0]))
+#print(most_common_interest_with(user=users[0]))
+
+
+"""
+Salaries and Experience
+"""
+
+salaries_and_tenures = [
+    (83000,8.7), (88000, 8.1), (48000, 0.7), (76000, 6),
+    (69000, 6.5), (76000, 7.5), (60000, 2.5), (83000, 10),
+    (48000, 1.9), (63000, 4.2)]
+
+salary_by_tenure = defaultdict(list)
+
+for salary, tenure in salaries_and_tenures:
+    salary_by_tenure[tenure].append(salary)
+
+average_salary_by_tenure = {
+    tenure: sum(salaries) / len(salaries)
+    for tenure, salaries in salary_by_tenure.items()
+}
+
+#print(average_salary_by_tenure)
+#Output: {8.7: 83000.0, 8.1: 88000.0, 0.7: 48000.0, 6: 76000.0, 6.5: 69000.0, 7.5: 76000.0, 2.5: 60000.0, 10: 83000.0, 1.9: 48000.0, 4.2: 63000.0}
+#Explanation: This is not helpful as there is not a lot of data with the same tenure.
+
+def tenure_bucket(tenure):
+    if tenure < 2:
+        return "less than two"
+    elif tenure < 5:
+        return "between two and five"
+    else:
+        return "more than five"
+
+salary_by_tenure_bucket = defaultdict(list)
+
+for salary, tenure in salaries_and_tenures:
+    bucket = tenure_bucket(tenure)
+    salary_by_tenure_bucket[bucket].append(salary)
+
+average_salary_bucket = {
+    tenure_bucket: sum(salaries) / len(salaries)
+    for tenure_bucket, salaries in salary_by_tenure_bucket.items()
+}
+
+#print(average_salary_bucket)
+#Output: {'more than five': 79166.66666666667, 'less than two': 48000.0, 'between two and five': 61500.0}
+#Explanation: Buckets are better for this type of data.
+
