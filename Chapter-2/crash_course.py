@@ -31,3 +31,13 @@ four_uniform_randoms = [random.random() for _ in range(4)]
 #Output: [0.5289353829404123, 0.5857468547498617, 0.8433262052335756, 0.8986446412645931]
 #Explanation: uniform number between 0 and 1.
 
+random_num = random.randrange(10)
+#print(random_num)
+#Output: 6
+#Explantion: random number from range(10)
+
+random_nums = random.randrange(3, 6)
+#print(random_nums)
+#Output: 4
+#Explanation: random number from range(3, 6)
+
