@@ -41,3 +41,14 @@ random_nums = random.randrange(3, 6)
 #Output: 4
 #Explanation: random number from range(3, 6)
 
+range_one_to_ten = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+random.shuffle(range_one_to_ten)
+#print(range_one_to_ten)
+#Output: [9, 4, 6, 10, 8, 1, 3, 5, 7, 2]
+#Explanation: random shuffle of list in place. 
+
+one_friend = random.choice(["alice", "bob", "john"])
+#print(one_friend)
+#Output: bob
+#Explanation: make a random choice of given list. 
+
