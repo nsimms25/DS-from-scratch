@@ -189,3 +189,64 @@ average_salary_bucket = {
 #Output: {'more than five': 79166.66666666667, 'less than two': 48000.0, 'between two and five': 61500.0}
 #Explanation: Buckets are better for this type of data.
 
+"""
+Paid Accounts
+
+Here is the tenure and paid vs unpaid accounts as we know:
+0.7 paid
+1.9 unpaid
+2.5 paid
+4.2 unpaid
+6.0 unpaid
+6.5 unpaid
+7.5 unpaid
+8.1 unpaid
+8.7 paid
+10.0 paid
+"""
+
+def predict_paid_or_unpaid(years_experience):
+    if years_experience < 3:
+        return "paid"
+    elif years_experience < 8.5:
+        return "unpaid"
+    else:
+        return "paid"
+
+#The above was totally eyeballed and is not a reliable way to calculate, 
+# especially as more data becomes available.
+
+"""
+Topics of Interest
+
+Reusing the interests tuples from earlier.
+"""
+
+#Find the most popular interests.
+words_and_counts = Counter(word
+                           for user, interest in interests
+                           for word in interest.lower().split())
+#print(words_and_counts)
+#Output: Counter({'big': 3, 'data': 3, 'java': 3, 'python': 3, 'learning': 3, 'hadoop': 2, 'cassandra': 2, 'scikit-learn': 2, 'r': 2, 'statistics': 2, 'regression': 2, 'probability': 2, 'neural': 2, 'networks': 2, 'spark': 1, 'storm': 1, 'nosql': 1, 'mongodb': 1, 'hbase': 1, 'postgres': 1, 'scipy': 1, 'numpy': 1, 'statsmodels': 1, 'pandas': 1, 'machin': 1, 'decision': 1, 'trees': 1, 'libsvm': 1, 'c++': 1, 'haskell': 1, 'programming': 1, 'languages': 1, 'mathematics': 1, 'theory': 1, 'machine': 1, 'mahout': 1, 'artificial': 1, 'intelligence': 1, 'deep': 1, 'mapreduce': 1})
+
+#Here is a way to output the words that occur more than once.
+for word, count in words_and_counts.most_common():
+    if count > 1:
+        done = True
+        #print(word, count)
+"""Output:
+big 3
+data 3
+java 3
+python 3
+learning 3
+hadoop 2
+cassandra 2
+scikit-learn 2
+r 2
+statistics 2
+regression 2
+probability 2
+neural 2
+networks 2
+"""
