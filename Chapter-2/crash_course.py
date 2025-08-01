@@ -23,3 +23,11 @@ for i, name in enumerate(names):
 """
 Randomness
 """
+import random
+random.seed(34)
+
+four_uniform_randoms = [random.random() for _ in range(4)]
+#print(four_uniform_randoms)
+#Output: [0.5289353829404123, 0.5857468547498617, 0.8433262052335756, 0.8986446412645931]
+#Explanation: uniform number between 0 and 1.
+
