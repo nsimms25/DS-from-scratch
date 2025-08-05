@@ -105,7 +105,21 @@ def doubler(f):
     return g
 
 g = doubler(f)
-print(g(1,2))
+#print(g(1,2))
 #Output: 6
 #Explanation: f is a function that adds inputs, 
 # g is considered a higher order function that can now except any arg or kwargs f requires.
+
+#Generally speaking functions should have explicit inputs.
+#It makes it easier to understand what is going on.
+
+"""
+Type Annotations
+"""
+def add(a: int, b: int) -> int:
+    return a + b
+#print(add(1,6))
+#Works normally
+#print(add(2.1, 3))
+#Works, but pylance raises issue as a and b are type hinted as ints.
+#Explanation: Type hints make it easier for editors to autocomplete and catch type errors. 
