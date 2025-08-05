@@ -82,3 +82,30 @@ letters, numbers = zip(*pairs)
 #print(letters)
 #print(numbers)
 #Output: ('a', 'b', 'c') and (1, 2, 3)
+
+"""
+Args and kwargs
+"""
+
+def printer(*args, **kwargs):
+    print("unnamed args:", args)
+    print("keywords args:", kwargs)
+
+#printer(1,2, key="hi", key2="hello")
+#Output:
+# unnamed args: (1, 2)
+# keywords args: {'key': 'hi', 'key2': 'hello'}
+
+def f(x, y):
+    return x + y
+
+def doubler(f):
+    def g(*args, **kwargs):
+        return 2 * f(*args, **kwargs)
+    return g
+
+g = doubler(f)
+print(g(1,2))
+#Output: 6
+#Explanation: f is a function that adds inputs, 
+# g is considered a higher order function that can now except any arg or kwargs f requires.
