@@ -68,3 +68,17 @@ re_examples = [
 #Output: [True, <re.Match object; span=(1, 2), match='a'>, True, True, True]
 #Explanation: re.match is True if the start of a string matches, 
 # re.search checks any part for a match.
+
+"""
+Zip
+"""
+list1 = ['a', 'b', 'c']
+list2 = [1, 2, 3]
+#print([pair for pair in zip(list1, list2)])
+#Output: [('a', 1), ('b', 2), ('c', 3)]
+
+pairs = [('a', 1), ('b', 2), ('c', 3)]
+letters, numbers = zip(*pairs)
+#print(letters)
+#print(numbers)
+#Output: ('a', 'b', 'c') and (1, 2, 3)
