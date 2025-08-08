@@ -31,11 +31,11 @@ grades = [83, 95, 91, 87,70, 0, 85, 82, 100, 67, 73, 77, 0]
 histogram = Counter(min(grade // 10 * 10, 90) for grade in grades)
 
 plt.bar([x + 5 for x in histogram.keys()],
-        histogram.values(),
+        histogram.values(), # type: ignore
         10,
         edgecolor = (0, 0, 0))
 
-plt.axis([-5, 105, 0, 5])
+plt.axis([-5, 105, 0, 5]) # type: ignore
 
 plt.xticks([10 * i for i in range(11)])
 plt.xlabel("Decile")
@@ -53,7 +53,7 @@ plt.ylabel("# of times I heard Data Science")
 
 plt.ticklabel_format(useOffset=False)
 
-plt.axis([2016.5, 2018.5, 499, 506])
+plt.axis([2016.5, 2018.5, 499, 506]) # type: ignore
 plt.title("Look at the Increase")
 plt.show()
 
@@ -63,6 +63,24 @@ plt.xticks(years)
 plt.ylabel("# of times I heard Data Science")
 
 plt.ticklabel_format(useOffset=False)
-plt.axis([2016.5, 2018.5, 0, 550])
+plt.axis([2016.5, 2018.5, 0, 550]) # type: ignore
 plt.title("This looks more reasonable.")
+plt.show()
+
+"""
+Line Charts
+"""
+variance = [1, 2, 4, 8, 16, 32, 64, 128, 256]
+bias_squared = [256, 128, 64, 32, 16, 8, 4, 2, 1]
+total_error = [x + y for x, y in zip(variance, bias_squared)]
+xs = [i for i, _ in enumerate(variance)]
+
+plt.plot(xs, variance, "g-", label="variance")
+plt.plot(xs, bias_squared, "r-", label="bias^2")
+plt.plot(xs, total_error, "b:", label="total error")
+
+plt.legend(loc=9)
+plt.xlabel("model complexity")
+plt.xticks([])
+plt.title("The Bias-Variance Tradeoff")
 plt.show()
